@@ -1,5 +1,5 @@
 {
-  "name": "@username/sudoku-solver",
+  "name": "@mattflow/sudoku-solver",
   "version": "0.0.1",
   "description": "Simple sudoku solver",
   "main": "index.js",
