@@ -2,6 +2,8 @@ Sudoku Solver
 =============
 
 A simple, brute force sudoku sovler
+[![Build Status](https://travis-ci.org/mattflow/sudoku-solver.svg?branch=master)](https://travis-ci.org/mattflow/sudoku-solver)
+[![Coverage Status](https://coveralls.io/repos/github/mattflow/sudoku-solver/badge.svg?branch=master)](https://coveralls.io/github/mattflow/sudoku-solver?branch=master)
 
 ## Installation
 
