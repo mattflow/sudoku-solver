@@ -111,6 +111,6 @@ module.exports = (board) => {
   
   let puzzle = {board:copy(board), solved:false};
   solve(0, puzzle);
-  return puzzle.board;
+  return puzzle.board.join('');
 
 };
