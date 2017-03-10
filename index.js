@@ -1,5 +1,6 @@
 'use strict';
 
+// Returns true for a valid board
 function isValid(board) {
   // Check for valid input
   if (!Array.isArray(board)) {
@@ -16,6 +17,15 @@ function isValid(board) {
   return true;
 };
 
+// Returns a deep copy of a board
+function copy(board) {
+  let ret = [];
+  for (let i = 0; i < board.length; i++) {
+    ret.push(board[i]);
+  }
+  return ret;
+}
+
 module.exports = (board) => {
   const checkLength = 9; // Number of elements in a row/col/3x3
   
@@ -28,5 +38,8 @@ module.exports = (board) => {
     return false;
   }
   
+  let puzzle = {board:copy(board), solved:false};
+  solve(0, puzzle);
+  return puzzle.board;
 
 };
