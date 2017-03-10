@@ -1,5 +1,7 @@
 'use strict';
 
+const checkLength = 9; // Number of elements in a row/col/3x3
+  
 // Returns true for a valid board
 function isValid(board) {
   // Check for valid input
@@ -98,8 +100,6 @@ function check3x3(index, number, board) {
 }
 
 module.exports = (board) => {
-  const checkLength = 9; // Number of elements in a row/col/3x3
-  
   // Turn string input into an array
   if (typeof board === 'string')
     board = board.split('');
