@@ -3,20 +3,16 @@
 const checkLength = 9; // Number of elements in a row/col/3x3
   
 // Returns true for a valid board
-function isValid(board) {
+function validate(board) {
   // Check for valid input
   if (!Array.isArray(board)) {
     throw 'Input must be an array or string';
-    return false;
   }
 
   // Check board length
   if (board.length !== 81) {
     throw 'Invalid board size';
-    return false;
   }
-
-  return true;
 };
 
 // Returns a deep copy of a board
@@ -105,9 +101,7 @@ module.exports = (board) => {
     board = board.split('');
   
   // Validate board
-  if (!isValid(board)) {
-    return false;
-  }
+  validate(board);
   
   let puzzle = {board:copy(board), solved:false};
   solve(0, puzzle);
