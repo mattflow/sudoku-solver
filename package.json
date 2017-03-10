@@ -1,22 +1,7 @@
 {
-  "name": "sudoku-solver",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mattflow/sudoku-solver.git"
-  },
-  "keywords": [],
-  "author": "Matt Flowers <mattmflowers28@gmail.com> (https://mattflow.github.io)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mattflow/sudoku-solver/issues"
-  },
-  "homepage": "https://github.com/mattflow/sudoku-solver#readme",
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
