@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/mattflow/sudoku-solver/issues"
   },
-  "homepage": "https://github.com/mattflow/sudoku-solver#readme"
+  "homepage": "https://github.com/mattflow/sudoku-solver#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
 }
