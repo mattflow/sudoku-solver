@@ -14,6 +14,16 @@ describe('#solve', function() {
     expect(result).to.throw('Invalid board size');
   });
   
+  it('throw error if board has less than 17 hints', function() {
+    var result = () => solve('000000015020060000000000408003000900000100000000008000050400000000070300800000060');
+    expect(result).to.throw('A board must have at least 17 hints');
+  });
+  
+  /*it('should solve puzzle with minimum hints', function() {
+    var result = solve('000050074801000000000000000070240000600000100000000000200106300040000020000800000');
+    expect(result).to.equal('962351874851467293437982516173248965684795132529613487295176348748539621316824759');
+  });*/
+  
   it('should solve easy puzzles', function() {
     var result = solve('050070200007850030280403000060040072035208410920030050000604093070015600006020080');
     expect(result).to.equal('359176248647852931281493567168549372735268419924731856512684793873915624496327185');
