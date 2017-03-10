@@ -1,6 +1,6 @@
 {
   "name": "@mattflow/sudoku-solver",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Simple sudoku solver",
   "main": "index.js",
   "scripts": {
