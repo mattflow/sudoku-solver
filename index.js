@@ -2,7 +2,7 @@
 
 const checkLength = 9; // Number of elements in a row/col/3x3
   
-// Returns true for a valid board
+// Throws error if board is invalid
 function validate(board) {
   // Check for valid input
   if (!Array.isArray(board)) {
