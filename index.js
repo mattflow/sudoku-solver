@@ -27,10 +27,7 @@ function copy(board) {
 // Recursive function that accepts a unsolved puzzle and
 // an index and returns a solved puzzle
 function solve(index, puzzle) {
-  if (puzzle.solved) {
-    return;
-  }
-  else if (index >= 81) {
+  if (index >= 81) {
     puzzle.solved = true;
   }
   else if (puzzle.board[index] != 0) {
