@@ -1,0 +1,19 @@
+{
+  "name": "@username/sudoku-solver",
+  "version": "0.0.1",
+  "description": "Simple sudoku solver",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattflow/sudoku-solver.git"
+  },
+  "author": "Matt Flowers <mattmflowers28@gmail.com> (https://mattflow.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattflow/sudoku-solver/issues"
+  },
+  "homepage": "https://github.com/mattflow/sudoku-solver#readme"
+}
