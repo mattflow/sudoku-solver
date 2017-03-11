@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --content-base ./ --inline --hot --open",
     "build": "webpack -p",
     "dev": "webpack -d"
   },
