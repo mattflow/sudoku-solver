@@ -3,7 +3,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --content-base ./ --inline --hot --open",
     "build": "webpack -p",
-    "dev": "webpack -d"
+    "dev": "webpack -d",
+    "deploy": "npm run build && git add -A && git commit -m 'Update page' && git push"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
