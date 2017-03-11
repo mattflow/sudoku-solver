@@ -4,8 +4,7 @@ html {
 
 body {
   padding: 0;
-  width: 100%;
-  margin: 25px 15px;
+  margin: 25px 0;
 }
 
 .Header {
@@ -13,5 +12,12 @@ body {
 }
 
   .Header h1 {
-    font-size: 4.2rem;
+    font-size: 4.5rem;
+  }
+
+  /* Extra Small Devices, Phones */ 
+  @media only screen and (max-width : 480px) {
+    .Header h1 {
+      font-size: 2.7rem;
+    }
   }
