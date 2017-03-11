@@ -1,0 +1,17 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  padding: 0;
+  width: 100%;
+  margin: 25px 15px;
+}
+
+.Header {
+  text-align: center;
+}
+
+  .Header h1 {
+    font-size: 4.2rem;
+  }
