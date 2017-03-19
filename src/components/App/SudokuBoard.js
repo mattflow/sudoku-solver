@@ -4,7 +4,7 @@ import SudokuSection from './SudokuBoard/SudokuSection';
 class SudokuBoard extends Component {
   constructor() {
     super();
-    this.state = { indecies: [
+    this.state = { indices: [
                       0,  1,  2,  9,  10, 11, 18, 19, 20,
                       3,  4,  5,  12, 13, 14, 21, 22, 23,
                       6,  7,  8,  15, 16, 17, 24, 25, 26, 
@@ -21,19 +21,19 @@ class SudokuBoard extends Component {
       <table className="SudokuBoard">
         <tbody>
           <tr>
-            <td><SudokuSection index={this.state.indecies.slice(0, 9)} /></td>
-            <td><SudokuSection index={this.state.indecies.slice(9, 18)} /></td>
-            <td><SudokuSection index={this.state.indecies.slice(18, 27)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(0, 9)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(9, 18)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(18, 27)} /></td>
           </tr>
           <tr>
-            <td><SudokuSection index={this.state.indecies.slice(27, 36)} /></td>
-            <td><SudokuSection index={this.state.indecies.slice(36, 45)} /></td>
-            <td><SudokuSection index={this.state.indecies.slice(45, 54)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(27, 36)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(36, 45)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(45, 54)} /></td>
           </tr>
           <tr>
-            <td><SudokuSection index={this.state.indecies.slice(54, 63)} /></td>
-            <td><SudokuSection index={this.state.indecies.slice(63, 72)} /></td>
-            <td><SudokuSection index={this.state.indecies.slice(72, 81)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(54, 63)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(63, 72)} /></td>
+            <td><SudokuSection index={this.state.indices.slice(72, 81)} /></td>
           </tr>
         </tbody>
       </table>
