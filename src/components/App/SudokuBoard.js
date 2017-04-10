@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SudokuBox from './SudokuBoard/SudokuBox';
+import Button from './SudokuBoard/Button';
 
 export default class SudokuBoard extends Component {
   constructor() {
@@ -7,7 +8,29 @@ export default class SudokuBoard extends Component {
     const numBoxes = 81;
     this.state = {
       puzzle: Array(numBoxes).fill(0)
+    };
+  }
+
+  handleChange(e, index) {
+    let puzzle = this.state.puzzle.slice();
+    const value = Number(e.target.value);
+    if (value <= 9 && value >= 0) {
+      puzzle[index] = value;
+      this.setState({
+        puzzle: puzzle
+      });
     }
+  }
+
+  loadRandom() {
+    fetch('https://enigmatic-crag-59629.herokuapp.com/api/sudokus/random')
+      .then(response => response.json())
+      .then(data => {
+        const puzzle = data.puzzle.split('');
+        this.setState({
+          puzzle: puzzle
+        });
+      });
   }
 
   renderBoxes(puzzle) {
@@ -21,7 +44,7 @@ export default class SudokuBoard extends Component {
           boxRow = [];
           for (let m = 0; m < 3; m++) {
             index = i*27 + k*9 + j*3 + m;
-            boxRow.push(this.renderBox(index, puzzle[index]));
+            boxRow.push(this.renderBox(index, Number(puzzle[index])));
           }
           boxRows.push(<tr key={index}>{ boxRow }</tr>);
         }
@@ -41,16 +64,25 @@ export default class SudokuBoard extends Component {
   }
 
   renderBox(id, value) {
-    return <td key={id}><SudokuBox id={ id } value={ value } /></td>
+    return <td key={id}><SudokuBox id={ id } value={ value } onChange={ (e, index) => this.handleChange(e, id) } /></td>
   }
 
   render() {
     return (
-      <table className="SudokuBoard">
-        <tbody>
-          { this.renderBoxes(this.state.puzzle) }
-        </tbody>
-      </table>
+      <div>
+        <table className="SudokuBoard">
+          <tbody>
+            { this.renderBoxes(this.state.puzzle) }
+          </tbody>
+        </table>
+        <div className='SudokuButtons'>
+          <div className='row'>
+            <div className='col-6'>
+              <Button style='secondary' text='Load Random' onClick={() => this.loadRandom()} />
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
