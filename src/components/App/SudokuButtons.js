@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Button from './SudokuButtons/Button';
+import solver from '@mattflow/sudoku-solver';
 
 export default class SudokuButtons extends Component {
+  solvePuzzle(puzzle) {
+    console.log(solver(puzzle));
+  }
+
   render() {
     return (
       <div className="SudokuButtons">

@@ -5,10 +5,9 @@ export default class SudokuBoard extends Component {
   constructor() {
     super();
     this.state = {
-      puzzle: '400002690902658000060034000500020163100000002278010005000780050000263809081500007'
-    };
+      puzzle: Array(81).fill(0)
+    }
   }
-  
   render() {
     const length = 3;
     const width = 3;
@@ -17,7 +16,7 @@ export default class SudokuBoard extends Component {
     for (var i = 0; i < length; i++) {
       row = [];
       for (var j = 0; j < width; j++) {
-        row.push(<td key={j}><SudokuBoardBox puzzle={this.state.puzzle.split('')} start={27*i + 3*j} /></td>);
+        row.push(<td key={j}><SudokuBoardBox puzzle={this.state.puzzle} start={27*i + 3*j} /></td>);
       }
       rows.push(<tr key={i}>{ row }</tr>);
     }
