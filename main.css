@@ -8,7 +8,7 @@ body {
 }
 
 .App {
-  margin-top: 15px 0;
+  margin: 15px 0;
 }
 
 .Header {
@@ -31,12 +31,4 @@ body {
   height: 40px;
   font-size: 1.5rem;
   text-align: center;
-}
-
-@media only screen and (max-width: 576px) {
-  .SudokuBox {
-    width: 34px;
-    height: 34px;
-    font-size: 1.2rem;
-  }
 }
