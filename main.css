@@ -1,46 +1,23 @@
 html {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 body {
-  color: #4a4c51;
+  margin: 0;
   padding: 0;
-  margin: 25px 0;
 }
-
 .Header {
   text-align: center;
 }
 
-  .Header h1 {
-    font-size: 4.5rem;
-  }
-
-  
 .SudokuBoard {
   margin: auto;
-}
-
-.SudokuSection {
-  margin: 2px;
+  background-color: #bbb;
 }
 
 .SudokuBox {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
   text-align: center;
-  color: #2e64ea;
-  font-size: 1.6rem;
-  width: 50px;
-  height: 50px;
-}
-
-  /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
-  .Header h1 {
-    font-size: 2.7rem;
-  }
-  .SudokuBox {
-    font-size: 1rem;
-    width: 30px;
-    height: 30px;
-  }
 }

@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import Container from './App/Container';
 import Header from './App/Header';
 import SudokuBoard from './App/SudokuBoard';
+import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <div className="container">
-        <Header title="Sudoku Solver" />
-        <SudokuBoard />
+      <div className="App">
+        <Container>
+          <Header title="Sudoku Solver" />
+          <SudokuBoard />
+        </Container>
       </div>
     );
   }
-};
-
-export default App;
+}
