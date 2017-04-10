@@ -9216,16 +9216,16 @@ function validate(board) {
 
 // Returns a deep copy of a board
 function copy(board) {
-  let ret = [];
+  let copy = [];
   let emptyBoxes = 0;
   for (let i = 0; i < board.length; i++) {
-    ret.push(Number(board[i]));
-    if (ret[i] === 0)
+    copy.push(Number(board[i]));
+    if (copy[i] === 0)
       emptyBoxes++;
     if (emptyBoxes > 64)
       throw 'A board must have at least 17 hints';
   }
-  return ret;
+  return copy;
 }
 
 // Recursive function that accepts a unsolved puzzle and

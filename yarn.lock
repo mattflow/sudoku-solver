@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@mattflow/sudoku-solver@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@mattflow/sudoku-solver/-/sudoku-solver-1.1.0.tgz#b891b83cbbf6624d39eba7e7bd8fe5f2813deec5"
+"@mattflow/sudoku-solver@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@mattflow/sudoku-solver/-/sudoku-solver-1.1.1.tgz#47ed0da39c20bd499a835d0b669cc4e930276a64"
 
 abbrev@1:
   version "1.0.9"
