@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SudokuBoardBox from './SudokuBoard/SudokuBoardBox';
-import './SudokuBoard.css';
 
 export default class SudokuBoard extends Component {
   constructor() {

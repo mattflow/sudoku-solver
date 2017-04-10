@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SudokuBox from './SudokuBoardBox/SudokuBox';
-import './SudokuBoardBox.css';
 
 export default class SudokuBoardBox extends Component {
   render() {
