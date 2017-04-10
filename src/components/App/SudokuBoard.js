@@ -1,29 +1,54 @@
 import React, { Component } from 'react';
-import SudokuBoardBox from './SudokuBoard/SudokuBoardBox';
+import SudokuBox from './SudokuBoard/SudokuBox';
 
 export default class SudokuBoard extends Component {
   constructor() {
     super();
+    const numBoxes = 81;
     this.state = {
-      puzzle: Array(81).fill(0)
+      puzzle: Array(numBoxes).fill(0)
     }
   }
-  render() {
-    const length = 3;
-    const width = 3;
-    let row;
+
+  renderBoxes(puzzle) {
+    let index, boxRow, boxRows, row;
     let rows = [];
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < 3; i++) {
       row = [];
-      for (var j = 0; j < width; j++) {
-        row.push(<td key={j}><SudokuBoardBox puzzle={this.state.puzzle} start={27*i + 3*j} /></td>);
+      for (let j = 0; j < 3; j++) {
+        boxRows = [];
+        for (let k = 0; k < 3; k++) {
+          boxRow = [];
+          for (let m = 0; m < 3; m++) {
+            index = i*27 + k*9 + j*3 + m;
+            boxRow.push(this.renderBox(index, puzzle[index]));
+          }
+          boxRows.push(<tr key={index}>{ boxRow }</tr>);
+        }
+        row.push(
+          <td key={index}>
+            <table>
+              <tbody>
+                { boxRows }
+              </tbody>
+            </table>
+          </td>
+        );
       }
-      rows.push(<tr key={i}>{ row }</tr>);
+      rows.push(<tr key={index}>{ row }</tr>);
     }
+    return rows;
+  }
+
+  renderBox(id, value) {
+    return <td key={id}><SudokuBox id={ id } value={ value } /></td>
+  }
+
+  render() {
     return (
       <table className="SudokuBoard">
         <tbody>
-          { rows }
+          { this.renderBoxes(this.state.puzzle) }
         </tbody>
       </table>
     );
