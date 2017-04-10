@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import SudokuBox from './SudokuBoard/SudokuBox';
 import Button from './SudokuBoard/Button';
+import solve from '@mattflow/sudoku-solver';
 
 export default class SudokuBoard extends Component {
   constructor() {
     super();
-    const numBoxes = 81;
+    this.numBoxes = 81;
+    this.previous;
     this.state = {
-      puzzle: Array(numBoxes).fill(0)
+      puzzle: Array(this.numBoxes).fill(0),
     };
   }
 
@@ -31,6 +33,30 @@ export default class SudokuBoard extends Component {
           puzzle: puzzle
         });
       });
+  }
+
+  solvePuzzle() {
+    this.previous = this.state.puzzle.slice();
+    let solvedPuzzle = solve(this.state.puzzle.slice(), 0);
+    this.setState({
+      puzzle: solvedPuzzle
+    });
+  }
+
+  loadPrevious() {
+    if (this.previous !== undefined) {
+      this.setState({
+        puzzle: this.previous.slice()
+      });
+    } else {
+      alert('No previous puzzle stored.');
+    }
+  }
+
+  clear() {
+    this.setState({
+      puzzle: Array(this.numBoxes).fill(0)
+    });
   }
 
   renderBoxes(puzzle) {
@@ -78,7 +104,18 @@ export default class SudokuBoard extends Component {
         <div className='SudokuButtons'>
           <div className='row'>
             <div className='col-6'>
+              <Button style='primary' text='Solve' onClick={() => this.solvePuzzle()} />
+            </div>
+            <div className='col-6'>
               <Button style='secondary' text='Load Random' onClick={() => this.loadRandom()} />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-6'>
+              <Button style='secondary' text='Load Previous' onClick={() => this.loadPrevious()} />
+            </div>
+            <div className='col-6'>
+              <Button style='secondary' text='Clear' onClick={() => this.clear()} />
             </div>
           </div>
         </div>
