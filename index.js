@@ -98,7 +98,7 @@ function check3x3(index, number, board) {
   return true;
 }
 
-module.exports = (board) => {
+module.exports = function(board) {
   // Turn string input into an array
   if (typeof board === 'string')
     board = board.split('');
