@@ -1,6 +1,6 @@
 'use strict';
 
-const checkLength = 9; // Number of elements in a row/col/3x3
+var checkLength = 9; // Number of elements in a row/col/3x3
   
 // Throws error if board is invalid
 function validate(board) {
@@ -18,16 +18,16 @@ function validate(board) {
 
 // Returns a deep copy of a board
 function copy(board) {
-  let cp = [];
-  let emptyBoxes = 0;
-  for (let i = 0; i < board.length; i++) {
-    cp.push(Number(board[i]));
-    if (cp[i] === 0)
+  var copy = [];
+  var emptyBoxes = 0;
+  for (var i = 0; i < board.length; i++) {
+    copy.push(Number(board[i]));
+    if (copy[i] === 0)
       emptyBoxes++;
     if (emptyBoxes > 64)
       throw 'A board must have at least 17 hints';
   }
-  return cp;
+  return copy;
 }
 
 // Recursive function that accepts a unsolved puzzle and
@@ -106,7 +106,7 @@ module.exports = (board) => {
   // Validate board
   validate(board);
   
-  let puzzle = {board:copy(board), solved:false};
+  var puzzle = {board:copy(board), solved:false};
   solve(0, puzzle);
   return puzzle.board.join('');
 
