@@ -10,6 +10,7 @@ export default class SudokuBoard extends Component {
     this.previous;
     this.state = {
       puzzle: Array(this.numBoxes).fill(0),
+      colored: Array(this.numBoxes).fill(true)
     };
   }
 
@@ -30,23 +31,41 @@ export default class SudokuBoard extends Component {
       .then(data => {
         const puzzle = data.puzzle.split('');
         this.setState({
-          puzzle: puzzle
+          puzzle: puzzle,
+          colored: this.getColored(puzzle)
         });
       });
   }
 
+  getColored(puzzle) {
+    let colored = [];
+    for (let i = 0; i < puzzle.length; i++) {
+      if (puzzle[i] !== '0' && puzzle[i] !== 0) {
+        colored.push(true);
+      }
+      else {
+        colored.push(false);
+      }
+    }
+    return colored;
+  }
+
   solvePuzzle() {
-    this.previous = this.state.puzzle.slice();
     let solvedPuzzle = solve(this.state.puzzle.slice(), 0);
+    if (solvedPuzzle != undefined) {
+      this.previous = this.state.puzzle.slice();
+    }
     this.setState({
-      puzzle: solvedPuzzle
+      puzzle: solvedPuzzle,
+      colored: this.getColored(this.previous)
     });
   }
 
   loadPrevious() {
     if (this.previous !== undefined) {
       this.setState({
-        puzzle: this.previous.slice()
+        puzzle: this.previous.slice(),
+        colored: this.getColored(this.previous)
       });
     } else {
       alert('No previous puzzle stored.');
@@ -54,8 +73,10 @@ export default class SudokuBoard extends Component {
   }
 
   clear() {
+    this.coloredBoxes = Array(this.numBoxes).fill(true);
     this.setState({
-      puzzle: Array(this.numBoxes).fill(0)
+      puzzle: Array(this.numBoxes).fill(0),
+      colored: Array(this.numBoxes).fill(true),
     });
   }
 
@@ -70,7 +91,7 @@ export default class SudokuBoard extends Component {
           boxRow = [];
           for (let m = 0; m < 3; m++) {
             index = i*27 + k*9 + j*3 + m;
-            boxRow.push(this.renderBox(index, Number(puzzle[index])));
+            boxRow.push(this.renderBox(index, Number(puzzle[index]), this.state.colored[index]));
           }
           boxRows.push(<tr key={index}>{ boxRow }</tr>);
         }
@@ -89,8 +110,17 @@ export default class SudokuBoard extends Component {
     return rows;
   }
 
-  renderBox(id, value) {
-    return <td key={id}><SudokuBox id={ id } value={ value } onChange={ (e, index) => this.handleChange(e, id) } /></td>
+  renderBox(id, value, colored) {
+    return (
+      <td key={id}>
+        <SudokuBox
+          id={ id }
+          value={ value } 
+          onChange={ (e, index) => this.handleChange(e, id) } 
+          class={ colored ? 'colored' : 'uncolored' }
+         />
+       </td>
+    );
   }
 
   render() {

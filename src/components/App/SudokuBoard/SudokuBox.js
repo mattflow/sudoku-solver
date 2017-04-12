@@ -9,7 +9,7 @@ export default class SudokuBox extends Component {
         type='tel'
         value={value} 
         id={ 'box' + this.props.id } 
-        className="SudokuBox"
+        className={ 'SudokuBox' + ' ' + this.props.class }
         onChange={this.props.onChange}
       />
     );

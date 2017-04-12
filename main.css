@@ -34,6 +34,11 @@ body {
   text-align: center;
 }
 
+.colored {
+  color: #609dff;
+  font-weight: bold;
+}
+
 .SudokuButtons {
   max-width: 500px;
   margin: auto;
