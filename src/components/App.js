@@ -10,7 +10,7 @@ export default class App extends Component {
         <Container>
           <Header title="Sudoku Solver" />
           <SudokuBoard />
-          <p>Note: I am a broke college student, so I enroll in the free plans offered by most of the technologies I use (mLab, Heroku and GitHub Pages). That being said, my API, which is hosted on Heroku, becomes inactive if goes a short period of time without a request. If you press the 'Load Random' button and a puzzle does not load right away, give the API a couple seconds to wake up. I promise it will load!</p>
+          <p>Note: I am a broke college student, so I enroll in the free plans offered by most of the technologies I use (mLab, Heroku and GitHub). With that being said, my API, which is hosted on Heroku, becomes inactive if goes a short period of time without a request. If you press the 'Load Random' button and a puzzle does not load right away, give the API a couple seconds to wake up. I promise it will load!</p>
         </Container>
       </div>
     );
