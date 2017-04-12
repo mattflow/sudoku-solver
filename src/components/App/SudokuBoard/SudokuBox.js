@@ -6,6 +6,7 @@ export default class SudokuBox extends Component {
     return (
       <input
         tabIndex={this.props.id + 1}
+        type='tel'
         value={value} 
         id={ 'box' + this.props.id } 
         className="SudokuBox"
