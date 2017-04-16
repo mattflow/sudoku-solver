@@ -14,6 +14,11 @@ export default class SudokuBoard extends Component {
     };
   }
 
+  autotab(tabIndex) {
+    const nextBox = document.querySelector('input[tabindex="' + tabIndex + '"]');
+    nextBox.focus()
+  }
+
   handleChange(e, index) {
     let puzzle = this.state.puzzle.slice();
     const value = Number(e.target.value);
@@ -23,6 +28,7 @@ export default class SudokuBoard extends Component {
         puzzle: puzzle
       });
     }
+    this.autotab(e.target.tabIndex + 1);
   }
 
   loadRandom() {
