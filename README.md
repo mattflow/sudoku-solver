@@ -3,7 +3,7 @@ Sudoku Solver
 
 A simple, brute force sudoku sovler
 
-Give it a go: [https://mattflowers.me/sudoku-solver](https://mattflowers.me/sudoku-solver)
+Give it a go: [https://mattflow.com/udoku-solver](https://mattflow.com/sudoku-solver)
 
 [![Build Status](https://travis-ci.org/mattflow/sudoku-solver.svg?branch=master)](https://travis-ci.org/mattflow/sudoku-solver)
 [![Coverage Status](https://coveralls.io/repos/github/mattflow/sudoku-solver/badge.svg?branch=master)](https://coveralls.io/github/mattflow/sudoku-solver?branch=master)
