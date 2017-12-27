@@ -10,7 +10,8 @@ export default class SudokuBoard extends Component {
     this.previous;
     this.state = {
       puzzle: Array(this.numBoxes).fill(0),
-      colored: Array(this.numBoxes).fill(true)
+      colored: Array(this.numBoxes).fill(true),
+      loading: false
     };
   }
 
@@ -32,13 +33,17 @@ export default class SudokuBoard extends Component {
   }
 
   loadRandom() {
+    this.setState({
+      loading: true
+    });
     fetch('https://enigmatic-crag-59629.herokuapp.com/api/sudokus/random')
       .then(response => response.json())
       .then(data => {
         const puzzle = data.puzzle.split('');
         this.setState({
           puzzle: puzzle,
-          colored: this.getColored(puzzle)
+          colored: this.getColored(puzzle),
+          loading: false
         });
       });
   }
@@ -140,18 +145,18 @@ export default class SudokuBoard extends Component {
         <div className='SudokuButtons'>
           <div className='row'>
             <div className='col-6'>
-              <Button style='primary' text='Solve' onClick={() => this.solvePuzzle()} />
+              <Button style='primary' text='Solve' disabled={this.state.loading} onClick={() => this.solvePuzzle()} />
             </div>
             <div className='col-6'>
-              <Button style='secondary' text='Load Random' onClick={() => this.loadRandom()} />
+               <Button style='secondary' disabled={this.state.loading} text={this.state.loading ? 'Loading...' : 'Load Random'} onClick={() => this.loadRandom()} />
             </div>
           </div>
           <div className='row'>
             <div className='col-6'>
-              <Button style='secondary' text='Load Previous' onClick={() => this.loadPrevious()} />
+              <Button style='secondary' disabled={this.state.loading} text='Load Previous' onClick={() => this.loadPrevious()} />
             </div>
             <div className='col-6'>
-              <Button style='secondary' text='Clear' onClick={() => this.clear()} />
+              <Button style='secondary' text='Clear' disabled={this.state.loading} onClick={() => this.clear()} />
             </div>
           </div>
         </div>
