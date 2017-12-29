@@ -18,6 +18,11 @@ describe('#solve', function() {
     var result = () => solve('000000015020060000000000408003000900000100000000008000050400000000070300800000060');
     expect(result).to.throw('A valid puzzle must have at least 17 hints.');
   });
+
+  it('throw error if board is unabled to be solved', function() {
+    var result = () => solve('039176248647852931281493567168549372735268419924731856512684793873915624496327185')
+    expect(result).to.throw('Puzzle was unable to be solved.');
+  });
   
   /*it('should solve puzzle with minimum hints', function() {
     var result = solve('000050074801000000000000000070240000600000100000000000200106300040000020000800000');
