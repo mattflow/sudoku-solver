@@ -9,7 +9,11 @@ See it in action here: [mattflow.github.io/sudoku-solver](https://mattflow.githu
 
 ## Installation
 
-`npm install @mattflow/sudoku-solver`
+`npm install --save @mattflow/sudoku-solver`
+
+or
+
+`yarn add @mattflow/sudoku-solver`
 
 ## Usage
 
