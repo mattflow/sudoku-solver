@@ -1,4 +1,4 @@
-# Solver
+# Sudoku Solver
 
 Simple, fast sudoku solver.
 
