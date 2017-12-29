@@ -7,6 +7,10 @@
     "test": "mocha --reporter spec",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
+  "keywords": [
+    "sudoku",
+    "solver"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mattflow/sudoku-solver.git"

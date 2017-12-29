@@ -6,17 +6,17 @@ var solve = require('../index');
 describe('#solve', function() {
   it('throw error for bad input types', function() {
     var result = () => solve(8);
-    expect(result).to.throw('Input must be an array or string');
+    expect(result).to.throw('Puzzle must be string or array.');
   });
   
   it('throw error for invalid number of elements', function() {
-    var result = () => solve([0, 1, 4, 8, 3, 0, 0, 5]);
-    expect(result).to.throw('Invalid board size');
+    var result = () => solve('0123456');
+    expect(result).to.throw('Puzzle is an invalid size.');
   });
   
   it('throw error if board has less than 17 hints', function() {
     var result = () => solve('000000015020060000000000408003000900000100000000008000050400000000070300800000060');
-    expect(result).to.throw('A board must have at least 17 hints');
+    expect(result).to.throw('A valid puzzle must have at least 17 hints.');
   });
   
   /*it('should solve puzzle with minimum hints', function() {

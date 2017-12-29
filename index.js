@@ -1,113 +1,109 @@
+;(function() {
+
 'use strict';
 
-var checkLength = 9; // Number of elements in a row/col/3x3
-  
-// Throws error if board is invalid
-function validate(board) {
-  // Check for valid input
-  if (!Array.isArray(board)) {
-    throw 'Input must be an array or string';
-  }
+// Constants
 
-  // Check board length
-  if (board.length !== 81) {
-    throw 'Invalid board size';
-  }
-  
-};
+var ROW_COL_SIZE = 9;
+var SIZE = ROW_COL_SIZE * ROW_COL_SIZE;
+var SQRT_ROW_COL_SIZE = Math.sqrt(ROW_COL_SIZE);
 
-// Returns a deep copy of a board
-function copy(board) {
-  var copy = [];
-  var emptyBoxes = 0;
-  for (var i = 0; i < board.length; i++) {
-    copy.push(Number(board[i]));
-    if (copy[i] === 0)
-      emptyBoxes++;
-    if (emptyBoxes > 64)
-      throw 'A board must have at least 17 hints';
+var MIN_HINTS = 17;
+
+// Shared Functions
+
+// Solve
+
+var checkRow = function(puzzle, number, index) {
+  var start = Math.floor(index / ROW_COL_SIZE) * ROW_COL_SIZE;
+  for (var i = 0; i < ROW_COL_SIZE; i++) {
+    if (puzzle[start + i] === number) {
+      return false;
+    }
   }
-  return copy;
+  return true;
 }
 
-// Recursive function that accepts a unsolved puzzle and
-// an index and returns a solved puzzle
-function solve(index, puzzle) {
-  if (index >= 81) {
-    puzzle.solved = true;
+var checkCol = function(puzzle, number, index) {
+  var start = index % ROW_COL_SIZE;
+  for (var i = 0; i < ROW_COL_SIZE; i++) {
+    if (puzzle[start + i * ROW_COL_SIZE] === number) {
+      return false;
+    }
   }
-  else if (puzzle.board[index] != 0) {
-    solve(index + 1, puzzle);
+  return true;
+}
+
+var check3x3 = function(puzzle, number, index) {
+  var start = index - (index % ROW_COL_SIZE) % SQRT_ROW_COL_SIZE - ROW_COL_SIZE * (Math.floor(index / ROW_COL_SIZE) % SQRT_ROW_COL_SIZE);
+  for (var i = 0; i < ROW_COL_SIZE; i++) {
+    if (puzzle[start + ROW_COL_SIZE * Math.floor(i / SQRT_ROW_COL_SIZE) + i % SQRT_ROW_COL_SIZE] === number) {
+      return false;
+    }
+  }
+  return true;
+}
+
+var check = function(puzzle, number, index) {
+  return checkRow(puzzle, number, index) &&
+         checkCol(puzzle, number, index) &&
+         check3x3(puzzle, number, index);
+}
+
+var recursiveSolve = function(puzzle, index) {
+  if (index >= SIZE) {
+    return true;
+  }
+  else if (puzzle[index] !== 0) {
+    return recursiveSolve(puzzle, index + 1);
   }
   else {
-    for (var number = 1; number <= 9; number++) {
-      if (check(index, number, puzzle.board)) {
-        puzzle.board[index] = number;
-        solve(index + 1, puzzle);
-        if (puzzle.solved) {
-          return;
+    for (var number = 1; number <= ROW_COL_SIZE; number++) {
+      if (check(puzzle, number, index)) {
+        puzzle[index] = number;
+        if (recursiveSolve(puzzle, index + 1)) {
+          return true;
         }
       }
     }
-    puzzle.board[index] = 0;
+    puzzle[index] = 0;
+    return false;
   }
 }
 
-// Takes an index, number, and the board and
-// returns if the number is valid at that
-// location in the board
-function check(index, number, board) {
-  return checkRow(index, number, board) &&
-         checkCol(index, number, board) &&
-         check3x3(index, number, board);
-}
-
-// Takes an index, number, and the board and
-// returns if the number is valid in that index's
-// row
-function checkRow(index, number, board) {
-  var start = Math.floor(index / 9) * 9;
-  for (var i = 0; i < checkLength; i++) {
-    if (board[start + i] == number)
-      return false;
+var solve = function(puzzle) {
+  if (typeof puzzle === 'string') {
+    puzzle = puzzle.split('');
   }
-  return true;
-}
-
-// Takes an index, number, and the board and
-// returns if the number is valid in that index's
-// column
-function checkCol(index, number, board) {
-  var start = index % 9;
-  for (var i = 0; i < checkLength; i++) {
-    if (board[start + i * 9] == number)
-      return false;
+  else if (puzzle.constructor !== Array) {
+    throw 'Puzzle must be string or array.';
   }
-  return true;
-}
 
-// Takes an index, number, and the board and
-// returns if the number is valid in that index's
-// 3x3 box
-function check3x3(index, number, board) {
-  var start = (index - ((index % 9) % 3) - (9 * (Math.floor(index / 9) % 3)));
-  for (var i = 0; i < checkLength; i++) {
-    if (board[start + (9 * Math.floor(i / 3)) + i % 3] == number)
-      return false;
+  if (puzzle.length !== SIZE) {
+    throw('Puzzle is an invalid size.');
   }
-  return true;
+
+  var hints = 0;
+  var value;
+  puzzle = puzzle.map(function(element) { 
+    value = Number(element);
+    hints += value !== 0;
+    return value; 
+  });
+
+  if (hints < MIN_HINTS) {
+    throw 'A valid puzzle must have at least ' + MIN_HINTS + ' hints.';
+  }
+
+  if (!recursiveSolve(puzzle, 0)) {
+    throw('Puzzle was unable to be solved.');
+  }
+
+  return puzzle.join('');
 }
 
-module.exports = function(board) {
-  // Turn string input into an array
-  if (typeof board === 'string')
-    board = board.split('');
-  
-  // Validate board
-  validate(board);
-  
-  var puzzle = {board:copy(board), solved:false};
-  solve(0, puzzle);
-  return puzzle.board.join('');
+// Export
 
-};
+module.exports = solve;
+
+})();
