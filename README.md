@@ -13,7 +13,7 @@ See it in action here: [mattflow.github.io/sudoku-solver](https://mattflow.githu
 
 ## Usage
 
-The function accepts a string or array of 81 elements with '0' representing
+The function accepts a string or array of 81 elements with `0` representing
 an empty box.
 
 ```js
