@@ -1,7 +1,7 @@
-module.exports = (() => {
-  
+// eslint-disable-next-line func-names
+module.exports = (function () {
   'use-strict';
-  
+
   const CHUNK_SIZE = 3;
   const ROW_COL_SIZE = CHUNK_SIZE * CHUNK_SIZE;
   const SIZE = ROW_COL_SIZE * ROW_COL_SIZE;
@@ -97,4 +97,4 @@ module.exports = (() => {
   }
 
   return solve;
-})();
+}());
