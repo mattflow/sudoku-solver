@@ -86,7 +86,7 @@ module.exports = (function () {
     });
 
     if (hints < MIN_HINTS) {
-      throw new Error('A valid puzzle must have at least ' + MIN_HINTS + 'hints.');
+      throw new Error('A valid puzzle must have at least ' + MIN_HINTS + ' hints.');
     }
 
     if (!recursiveSolve(puzzle, 0)) {
