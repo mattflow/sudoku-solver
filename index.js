@@ -2,14 +2,14 @@
 module.exports = (function () {
   'use-strict';
 
-  const CHUNK_SIZE = 3;
-  const ROW_COL_SIZE = CHUNK_SIZE * CHUNK_SIZE;
-  const SIZE = ROW_COL_SIZE * ROW_COL_SIZE;
+  var CHUNK_SIZE = 3;
+  var ROW_COL_SIZE = CHUNK_SIZE * CHUNK_SIZE;
+  var SIZE = ROW_COL_SIZE * ROW_COL_SIZE;
 
-  const MIN_HINTS = 17;
+  var MIN_HINTS = 17;
 
   function checkRow(puzzle, number, index) {
-    const start = Math.floor(index / ROW_COL_SIZE) * ROW_COL_SIZE;
+    var start = Math.floor(index / ROW_COL_SIZE) * ROW_COL_SIZE;
     for (var i = 0; i < ROW_COL_SIZE; i += 1) {
       if (puzzle[start + i] === number) {
         return false;
@@ -19,7 +19,7 @@ module.exports = (function () {
   }
 
   function checkCol(puzzle, number, index) {
-    const start = index % ROW_COL_SIZE;
+    var start = index % ROW_COL_SIZE;
     for (var i = 0; i < ROW_COL_SIZE; i += 1) {
       if (puzzle[start + (i * ROW_COL_SIZE)] === number) {
         return false;
@@ -29,7 +29,7 @@ module.exports = (function () {
   }
 
   function check3x3(puzzle, number, index) {
-    const start = index - ((index % ROW_COL_SIZE) % CHUNK_SIZE) -
+    var start = index - ((index % ROW_COL_SIZE) % CHUNK_SIZE) -
       (ROW_COL_SIZE * (Math.floor(index / ROW_COL_SIZE) % CHUNK_SIZE));
     for (var i = 0; i < ROW_COL_SIZE; i += 1) {
       if (
