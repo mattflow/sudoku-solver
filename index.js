@@ -79,7 +79,7 @@ module.exports = (function () {
 
     var hints = 0;
     var value;
-    puzzle = puzzle.map((element) => {
+    puzzle = puzzle.map(function(element) {
       value = Number(element);
       hints += value !== 0;
       return value;
