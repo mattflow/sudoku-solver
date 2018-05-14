@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*",
+    "lint": "eslint --fix index.js",
+    "predeploy": "npm run lint"
   },
   "keywords": [
     "sudoku",
@@ -24,6 +26,9 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.12.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0"
   }

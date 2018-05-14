@@ -1,64 +1,59 @@
-;(function() {
+module.exports = (() => {
+  // Constants
 
-'use strict';
+  const CHUNK_SIZE = 3;
+  const ROW_COL_SIZE = CHUNK_SIZE * CHUNK_SIZE;
+  const SIZE = ROW_COL_SIZE * ROW_COL_SIZE;
 
-// Constants
+  const MIN_HINTS = 17;
 
-var ROW_COL_SIZE = 9;
-var SIZE = ROW_COL_SIZE * ROW_COL_SIZE;
-var SQRT_ROW_COL_SIZE = Math.sqrt(ROW_COL_SIZE);
-
-var MIN_HINTS = 17;
-
-// Shared Functions
-
-// Solve
-
-var checkRow = function(puzzle, number, index) {
-  var start = Math.floor(index / ROW_COL_SIZE) * ROW_COL_SIZE;
-  for (var i = 0; i < ROW_COL_SIZE; i++) {
-    if (puzzle[start + i] === number) {
-      return false;
+  function checkRow(puzzle, number, index) {
+    const start = Math.floor(index / ROW_COL_SIZE) * ROW_COL_SIZE;
+    for (let i = 0; i < ROW_COL_SIZE; i += 1) {
+      if (puzzle[start + i] === number) {
+        return false;
+      }
     }
-  }
-  return true;
-}
-
-var checkCol = function(puzzle, number, index) {
-  var start = index % ROW_COL_SIZE;
-  for (var i = 0; i < ROW_COL_SIZE; i++) {
-    if (puzzle[start + i * ROW_COL_SIZE] === number) {
-      return false;
-    }
-  }
-  return true;
-}
-
-var check3x3 = function(puzzle, number, index) {
-  var start = index - (index % ROW_COL_SIZE) % SQRT_ROW_COL_SIZE - ROW_COL_SIZE * (Math.floor(index / ROW_COL_SIZE) % SQRT_ROW_COL_SIZE);
-  for (var i = 0; i < ROW_COL_SIZE; i++) {
-    if (puzzle[start + ROW_COL_SIZE * Math.floor(i / SQRT_ROW_COL_SIZE) + i % SQRT_ROW_COL_SIZE] === number) {
-      return false;
-    }
-  }
-  return true;
-}
-
-var check = function(puzzle, number, index) {
-  return checkRow(puzzle, number, index) &&
-         checkCol(puzzle, number, index) &&
-         check3x3(puzzle, number, index);
-}
-
-var recursiveSolve = function(puzzle, index) {
-  if (index >= SIZE) {
     return true;
   }
-  else if (puzzle[index] !== 0) {
-    return recursiveSolve(puzzle, index + 1);
+
+  function checkCol(puzzle, number, index) {
+    const start = index % ROW_COL_SIZE;
+    for (let i = 0; i < ROW_COL_SIZE; i += 1) {
+      if (puzzle[start + (i * ROW_COL_SIZE)] === number) {
+        return false;
+      }
+    }
+    return true;
   }
-  else {
-    for (var number = 1; number <= ROW_COL_SIZE; number++) {
+
+  function check3x3(puzzle, number, index) {
+    const start = index - ((index % ROW_COL_SIZE) % CHUNK_SIZE) -
+      (ROW_COL_SIZE * (Math.floor(index / ROW_COL_SIZE) % CHUNK_SIZE));
+    for (let i = 0; i < ROW_COL_SIZE; i += 1) {
+      if (
+        puzzle[start + (ROW_COL_SIZE * Math.floor(i / CHUNK_SIZE)) + (i % CHUNK_SIZE)] === number
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function check(puzzle, number, index) {
+    return checkRow(puzzle, number, index) &&
+         checkCol(puzzle, number, index) &&
+         check3x3(puzzle, number, index);
+  }
+
+  function recursiveSolve(puzzle, index) {
+    if (index >= SIZE) {
+      return true;
+    } else if (puzzle[index] !== 0) {
+      return recursiveSolve(puzzle, index + 1);
+    }
+
+    for (let number = 1; number <= ROW_COL_SIZE; number += 1) {
       if (check(puzzle, number, index)) {
         puzzle[index] = number;
         if (recursiveSolve(puzzle, index + 1)) {
@@ -69,41 +64,36 @@ var recursiveSolve = function(puzzle, index) {
     puzzle[index] = 0;
     return false;
   }
-}
 
-var solve = function(puzzle) {
-  if (typeof puzzle === 'string') {
-    puzzle = puzzle.split('');
+  function solve(puzzle) {
+    if (typeof puzzle === 'string') {
+      puzzle = puzzle.split('');
+    } else if (puzzle.constructor !== Array) {
+      throw new TypeError('Puzzle must be string or array.');
+    }
+
+    if (puzzle.length !== SIZE) {
+      throw new Error('Puzzle is an invalid size.');
+    }
+
+    let hints = 0;
+    let value;
+    puzzle = puzzle.map((element) => {
+      value = Number(element);
+      hints += value !== 0;
+      return value;
+    });
+
+    if (hints < MIN_HINTS) {
+      throw new Error(`A valid puzzle must have at least ${MIN_HINTS} hints.`);
+    }
+
+    if (!recursiveSolve(puzzle, 0)) {
+      throw new Error('Puzzle was unable to be solved.');
+    }
+
+    return puzzle.join('');
   }
-  else if (puzzle.constructor !== Array) {
-    throw 'Puzzle must be string or array.';
-  }
 
-  if (puzzle.length !== SIZE) {
-    throw('Puzzle is an invalid size.');
-  }
-
-  var hints = 0;
-  var value;
-  puzzle = puzzle.map(function(element) { 
-    value = Number(element);
-    hints += value !== 0;
-    return value; 
-  });
-
-  if (hints < MIN_HINTS) {
-    throw 'A valid puzzle must have at least ' + MIN_HINTS + ' hints.';
-  }
-
-  if (!recursiveSolve(puzzle, 0)) {
-    throw('Puzzle was unable to be solved.');
-  }
-
-  return puzzle.join('');
-}
-
-// Export
-
-module.exports = solve;
-
+  return solve;
 })();
