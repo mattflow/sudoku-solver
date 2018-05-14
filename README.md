@@ -21,10 +21,10 @@ The function accepts a string or array of 81 elements with `0` representing
 an empty box.
 
 ```js
-var solve = require('@mattflow/sudoku-solver');
-var puzzle = '000001200100700045000430700090006300050807020006200090003019000970004006002500000';
-var solution = solve(puzzle);
-console.log(solution)
+const solve = require('@mattflow/sudoku-solver');
+const puzzle = '000001200100700045000430700090006300050807020006200090003019000970004006002500000';
+const solution = solve(puzzle);
+console.log(solution);
 // Output -> 745981263138762945629435718297156384354897621816243597583619472971324856462578139
 ```
 
