@@ -15,18 +15,30 @@ or
 
 `yarn add @mattflow/sudoku-solver`
 
-## Usage
+## Simple Usage
 
-The function accepts a string or array of 81 elements with `0` representing
-an empty box.
+Accepts a string or array of 81 elements with `0` representing an empty box.
+
+Returns a string containing the solved puzzle.
 
 ```js
-const solve = require('@mattflow/sudoku-solver');
-const puzzle = '000001200100700045000430700090006300050807020006200090003019000970004006002500000';
-const solution = solve(puzzle);
+var solve = require('@mattflow/sudoku-solver');
+var puzzle = '000001200100700045000430700090006300050807020006200090003019000970004006002500000';
+var solution = solve(puzzle);
 console.log(solution);
-// Output -> 745981263138762945629435718297156384354897621816243597583619472971324856462578139
+// 745981263138762945629435718297156384354897621816243597583619472971324856462578139
 ```
+
+## solve(puzzle, options)
+
+`puzzle`: A string or array of 81 elements with `0` representing an empty box.
+
+`options`: An optional object containing configurations.
+
+- `emptyValue`: Value representing an empty box. **Default:** `'0'`
+- `hintCheck`: Boolean determining if a hint check is performed. **Default:** `true`
+- `outputArray`: Boolean determining if an array is returned instead of a string. **Default:** `false`
+- `maxIterations`: Value determining the maximum number of iterations before exiting. `0` to disable. **Default:** `1000000`
 
 ## Running Tests
 
