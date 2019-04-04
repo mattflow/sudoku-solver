@@ -4,8 +4,9 @@
   "description": "Simple sudoku solver",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "test": "nyc mocha",
+    "report": "npm test && nyc report --reporter=lcov",
+    "cover": "npm run report && cat coverage/lcov.info | node_modules/.bin/coveralls"
   },
   "keywords": [
     "sudoku",
@@ -22,9 +23,8 @@
   },
   "homepage": "https://github.com/mattflow/sudoku-solver#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "coveralls": "^2.12.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0"
+    "coveralls": "^3.0.3",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0"
   }
 }
