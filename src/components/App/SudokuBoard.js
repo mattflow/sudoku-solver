@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SudokuBox from './SudokuBoard/SudokuBox';
 import Button from './SudokuBoard/Button';
 import solve from '@mattflow/sudoku-solver';
+import sudokus from '../sudokus.json';
 
 export default class SudokuBoard extends Component {
   constructor() {
@@ -35,17 +36,14 @@ export default class SudokuBoard extends Component {
   loadRandom() {
     this.setState({
       loading: true
-    });
-    fetch('https://enigmatic-crag-59629.herokuapp.com/api/sudokus/random')
-      .then(response => response.json())
-      .then(data => {
-        const puzzle = data.puzzle.split('');
-        this.setState({
-          puzzle: puzzle,
-          colored: this.getColored(puzzle),
-          loading: false
-        });
+    }, () => {
+      const puzzle = sudokus[Math.floor(Math.random() * sudokus.length)].puzzle;
+      this.setState({
+        puzzle,
+        colored: this.getColored(puzzle),
+        loading: false,
       });
+    });
   }
 
   getColored(puzzle) {
