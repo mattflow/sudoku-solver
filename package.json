@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc mocha",
     "report": "npm test && nyc report --reporter=lcov",
-    "cover": "npm run report && cat coverage/lcov.info | node_modules/.bin/coveralls"
+    "cover": "npm run report && cat coverage/lcov.info | node_modules/.bin/coveralls",
+    "prepublish": "npm run test"
   },
   "keywords": [
     "sudoku",
