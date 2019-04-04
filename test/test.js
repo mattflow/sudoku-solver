@@ -21,6 +21,12 @@ const evil = {
   solution: '781924356245673918936851724318245679672398541594716832423589167169437285857162493',
 };
 
+const notEnoughHints = '700000050040000908000001000008040000002000500000000800000500000100007080000000003';
+const unsolvable = '781924356245673918936851724318245679672398541594716832423589167169437285857162430'
+const empty = Array.apply(null, Array(81)).map(() => 0).join('');
+const forced = '123456789456789123789123456214365897365897214897214365531642978642978531978531642';
+const unBruteForceable = '000000000000003085001020000000507000004000100090000000500000073002010000000040009';
+
 describe('#solve()', () => {
   it('should solve easy puzzles', () => {
     assert.equal(solve(easy.puzzle), easy.solution);
@@ -36,5 +42,77 @@ describe('#solve()', () => {
 
   it('should solve evil puzzles', () => {
     assert.equal(solve(evil.puzzle), evil.solution);
+  });
+
+  it('should solve a puzzle with a custom empty value', () => {
+    const periodChar = easy.puzzle.replace(/0/g, '.');
+    assert.equal(solve(periodChar, { emptyValue: '.' }), easy.solution);
+  });
+
+  it('should output an array if specified', () => {
+    assert.equal(Array.isArray(solve(easy.puzzle, { outputArray: true })), true);
+  });
+
+  it('should allow hint check bypass', () => {
+    assert.equal(solve(empty, { hintCheck: false }), forced);
+  });
+
+  it('should throw an error for incorrect input', () => {
+    assert.throws(() => { solve(8) }, {
+      name: 'TypeError',
+      message: 'Puzzle must be string or array.',
+    });
+  });
+
+  it('should throw an error for invalid size', () => {
+    assert.throws(() => { solve(easy.puzzle.slice(1)) }, {
+      name: 'Error',
+      message: 'Puzzle is an invalid size.',
+    });
+  });
+
+  it('should throw an error for minimum hints', () => {
+    assert.throws(() => { solve(notEnoughHints) }, {
+      name: 'Error',
+      message: 'A valid puzzle must have at least 17 hints.',
+    });
+  });
+
+  it('should throw an error for unsolvable puzzles', () => {
+    assert.throws(() => { solve(unsolvable) }, {
+      name: 'Error',
+      message: 'Puzzle could not be solved.',
+    });
+  });
+
+  it('should throw an error for invalid puzzle values', () => {
+    assert.throws(() => { solve(easy.puzzle.replace('0', '.')) }, {
+      name: 'TypeError',
+      message: 'Invalid puzzle value: .',
+    });
+  });
+
+  it('should throw an error for out of range puzzle values', () => {
+    const outOfRange = easy.puzzle.split('');
+    outOfRange[0] = 10;
+
+    assert.throws(() => { solve(outOfRange) }, {
+      name: 'TypeError',
+      message: 'Invalid puzzle value: 10',
+    });
+
+    outOfRange[0] = '-1';
+
+    assert.throws(() => { solve(outOfRange) }, {
+      name: 'TypeError',
+      message: 'Invalid puzzle value: -1',
+    });
+  });
+
+  it('should throw an error for reaching max iterations', () => {
+    assert.throws(() => { solve(unBruteForceable) }, {
+      name: 'Error',
+      message: 'Max iterations reached. No solution found.',
+    });
   });
 });
