@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/mattflow/sudoku-solver#readme",
   "devDependencies": {
-    "coveralls": "^3.0.3",
-    "mocha": "^6.0.2",
-    "nyc": "^13.3.0"
+    "coveralls": "^3.1.0",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
   }
 }
