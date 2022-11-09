@@ -1,0 +1,35 @@
+{
+  "name": "@mattflow/sudoku-solver",
+  "version": "2.2.0",
+  "description": "Simple sudoku solver",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattflow/sudoku-solver.git"
+  },
+  "keywords": [
+    "sudoku",
+    "solver"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattflow/sudoku-solver/issues"
+  },
+  "homepage": "https://github.com/mattflow/sudoku-solver#readme",
+  "devDependencies": {
+    "jest": "^29.3.0",
+    "ts-jest": "^29.0.3",
+    "tsup": "^6.4.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.25.2"
+  }
+}
